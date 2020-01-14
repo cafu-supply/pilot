@@ -1,0 +1,30 @@
+package main
+
+import (
+	"gitlab.com/afmelsaidy/pilot-management/service"
+	"gitlab.com/afmelsaidy/pilot-management/endpoint"
+	httpTransport "github.com/go-kit/kit/transport/http"
+	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+)
+
+func assignRoutes(router *mux.Router) *mux.Router {
+	service := service.MakeServiceImpl()
+
+	listPilotsHandler := httpTransport.NewServer(
+		endpoint.MakeListPilotsEndpoint(service),
+		endpoint.MakeDecoder(endpoint.ListPilotsRequest{}),
+		endpoint.EncodeResponse)
+
+	router.Handle("/pilots", listPilotsHandler).Methods("GET")
+
+	return router
+}
+
+func main() {
+	router := mux.NewRouter()
+	assignRoutes(router)
+	http.Handle("/", router)
+	log.Fatal(http.ListenAndServe(":8080", nil))
+}
