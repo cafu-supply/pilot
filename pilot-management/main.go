@@ -1,8 +1,8 @@
 package main
 
 import (
-	"gitlab.com/afmelsaidy/pilot-management/service"
-	"gitlab.com/afmelsaidy/pilot-management/endpoint"
+	"./service"
+	"./endpoint"
 	httpTransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
 	"log"
