@@ -3,7 +3,7 @@ package service
 import (
 	"../domain/entity"
 	"../repository"
-	"../repository/impl/mock"
+	"../repository/impl/postgresql"
 )
 
 type ServiceImpl struct {
@@ -11,7 +11,8 @@ type ServiceImpl struct {
 }
 
 func MakeServiceImpl() ServiceImpl {
-	return ServiceImpl{pilotRepo: &mock.PilotRepoMock{}}
+	pilotRepo := postgresql.MakePostgresPilotRepo()
+	return ServiceImpl{pilotRepo: &pilotRepo}
 }
 
 func (s ServiceImpl) ListPilots() ([]entity.Pilot, error) {
