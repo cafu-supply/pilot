@@ -7,11 +7,11 @@ import (
 
 func openConn() sqlbuilder.Database {
 	connSettings := postgresql.ConnectionURL{
-		User:     "afmelsaidy",
+		User:     "postgres",
 		Password: "",
 		Host:     "",
 		Socket:   "",
-		Database: "CAFU",
+		Database: "cafu_pilot",
 		Options:  nil,
 	}
 
@@ -25,9 +25,9 @@ func openConn() sqlbuilder.Database {
 }
 
 func getReadConn() sqlbuilder.Database {
-	return openConn();
+	return openConn()
 }
 
 func getWriteConn() sqlbuilder.Database {
-	return openConn();
+	return openConn()
 }

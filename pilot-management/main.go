@@ -17,7 +17,13 @@ func assignRoutes(router *mux.Router) *mux.Router {
 		endpoint.MakeDecoder(endpoint.ListPilotsRequest{}),
 		endpoint.EncodeResponse)
 
+	updatePilotStatusHandler := httpTransport.NewServer(
+		endpoint.MakeUpdatePilotStatusEndpoint(service),
+		endpoint.MakeDecoder(endpoint.UpdatePilotStatusRequest{}),
+		endpoint.EncodeResponse)
+
 	router.Handle("/pilots", listPilotsHandler).Methods("GET")
+	router.Handle("/pilots", updatePilotStatusHandler).Methods("PUT")
 
 	return router
 }

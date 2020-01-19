@@ -20,6 +20,18 @@ func MakeListPilotsEndpoint(s domain.Service) endpoint.Endpoint {
 	}
 }
 
+func MakeUpdatePilotStatusEndpoint(s domain.Service) endpoint.Endpoint {
+	return func(_ context.Context, request interface{}) (interface{}, error) {
+		req := request.(UpdatePilotStatusRequest)
+		par := domain.UpdatePilotStatusParams(req)
+		v, err := s.UpdatePilotStatus(&par)
+		if err != nil {
+						return Response{Data: nil, Errors: []error{err}}, err
+					}
+					return Response{Data: toPilotView(*v), Errors: nil}, nil
+	}
+}
+
 //
 //func MakeGetPilot(s Service) endpoint.Endpoint {
 //	return func(_ context.Context, request interface{}) (interface{}, error) {

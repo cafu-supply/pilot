@@ -1,9 +1,11 @@
 package service
 
 import (
+	"../domain"
 	"../domain/entity"
 	"../repository"
 	"../repository/impl/postgresql"
+
 )
 
 type ServiceImpl struct {
@@ -17,6 +19,16 @@ func MakeServiceImpl() ServiceImpl {
 
 func (s ServiceImpl) ListPilots() ([]entity.Pilot, error) {
 	return s.pilotRepo.ListPilots()
+}
+
+func (s ServiceImpl) UpdatePilotStatus(params *domain.UpdatePilotStatusParams) (*entity.Pilot, error) {
+	pilot := entity.Pilot(*params)
+	//err := json.Unmarshal(params, &pilot)
+	//if err != nil {
+	//	log.Println(err)
+	//	return nil, err
+	//}
+	return s.pilotRepo.UpdatePilotStatus(&pilot)
 }
 
 //

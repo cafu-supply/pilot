@@ -24,13 +24,23 @@ type CreatePilotRequest struct {
 	ServiceId  string `json:"serviceId"`
 }
 
-type UpdatePilotRequest struct {
+//type UpdatePilotRequest struct {
+//	Id         string `json:"id"`
+//	UserId     string `json:"userId"`
+//	CodeName   string `json:"codeName"`
+//	SupplierId string `json:"supplierId"`
+//	MarketId   string `json:"marketId"`
+//	ServiceId  string `json:"serviceId"`
+//}
+
+type UpdatePilotStatusRequest struct {
 	Id         string `json:"id"`
 	UserId     string `json:"userId"`
 	CodeName   string `json:"codeName"`
 	SupplierId string `json:"supplierId"`
 	MarketId   string `json:"marketId"`
 	ServiceId  string `json:"serviceId"`
+	Status     string `json:"status"`
 }
 
 //func DecodeListPilotsRequest(_ context.Context, r *http.Request) (interface{}, error) {
